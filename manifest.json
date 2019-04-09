@@ -2,7 +2,7 @@
     "name": "Healthy Shopping",
     "version": "1.0",
     "description": "Healthy food shopping recommendation chrome extension",
-    "permissions": ["activeTab"],
+    "permissions": ["activeTab", "storage"],
     "background": {
       "scripts": ["background.js"],
       "persistent": false
