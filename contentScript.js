@@ -11,17 +11,19 @@ chrome.storage.local.get(['type'], function(result) {
     console.log("User type: " + result.type)
     switch(result.type) {
         case TYPE_HIDE:
-          // code block
-          break;
+            document.querySelectorAll("div[class^='asin_card__root__']").forEach(el => {
+                if (-1 === healthy.indexOf(el.children[0].href.split("/")[4].split("?")[0])) {
+                    el.parentElement.style.display = "none"
+                }
+            })
+            break;
         case TYPE_RECOMMEND:
-            window.setTimeout(function() {
-                document.querySelectorAll("div[class^='asin_card__root__']").forEach(el => {
-                    if (-1 !== healthy.indexOf(el.children[0].href.split("/")[4].split("?")[0])) {
-                        el.style.backgroundColor = "green"
-                    }
-                })
-            }, 100);
-          break;
+            document.querySelectorAll("div[class^='asin_card__root__']").forEach(el => {
+                if (-1 !== healthy.indexOf(el.children[0].href.split("/")[4].split("?")[0])) {
+                    el.style.backgroundColor = "green"
+                }
+            })
+            break;
         case TYPE_NOTHING:
           // code block
       }
