@@ -9,8 +9,12 @@
     },
     "content_scripts": [
         {
-          "matches": ["https://*.primenow.amazon.com/*"],
-          "js": ["contentScript.js"]
+          "matches": ["https://primenow.amazon.com/search*"],
+          "js": ["contentScriptSearch.js"]
+        },
+        {
+          "matches": ["https://primenow.amazon.com/dp/*"],
+          "js": ["contentScriptClick.js"]
         }
       ],
     "icons": { 
