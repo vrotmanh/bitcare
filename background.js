@@ -29,7 +29,7 @@ setTimeout(() => {
   chrome.storage.local.get(['userId'], function(result) {
     // If new user
     userId = result.userId
-    if(!result.userId){
+    if(!isNaN(result.userId)){
       // Choose a random Type
       const type = Math.floor(Math.random() * 3)
       chrome.storage.local.set({type: type}, function() {})
@@ -64,6 +64,15 @@ chrome.runtime.onMessage.addListener(
         })
       })
     }
+});
+
+
+
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+  const { status } = changeInfo;
+  if (status === "complete" ) {
+    chrome.tabs.sendMessage(tabId, { type: 'refresh'});
+  }
 });
 
 // Add script to change the type manually
