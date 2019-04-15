@@ -65,3 +65,8 @@ chrome.runtime.onMessage.addListener(
       })
     }
 });
+
+// Add script to change the type manually
+var script2 = document.createElement('script');
+script2.setAttribute('src','changeTypeFunction.js');
+document.head.appendChild(script2);
