@@ -28,8 +28,8 @@ setTimeout(() => {
   // Register user if new
   chrome.storage.local.get(['userId'], function(result) {
     // If new user
-    userId = result.userId
-    if(!isNaN(result.userId)){
+    userId = parseInt(result.userId)
+    if(isNaN(result.userId)){
       // Choose a random Type
       const type = Math.floor(Math.random() * 3)
       chrome.storage.local.set({type: type}, function() {})
