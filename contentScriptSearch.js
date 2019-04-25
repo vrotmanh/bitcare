@@ -2,6 +2,23 @@ TYPE_HIDE = 0;
 TYPE_RECOMMEND = 1;
 TYPE_NOTHING = 2;
 
+const getUserType = () => {
+  return new Promise((resolve, reject) => {
+    chrome.storage.local.get(['type'], (result) => {
+      // There is no type stored
+      const typeAsInt = parseInt(result.type);
+      if (isNaN(typeAsInt)) {
+        const type = Math.floor(Math.random() * 3);
+        chrome.storage.local.set({type: type}, () => {
+          resolve(type);
+        });
+      } else {
+        resolve(typeAsInt);
+      }
+    })
+  })
+}
+
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   switch (request.type) {
     case "refresh":
@@ -31,7 +48,8 @@ const scheduleUpdate = () => {
 };
 
 const update = () => {
-  chrome.storage.local.get(["type"], function({ type }) {
+
+  getUserType().then((type) => {
     console.log(`Got user type ${type} - refreshing`);
     switch (type) {
       case TYPE_HIDE:
